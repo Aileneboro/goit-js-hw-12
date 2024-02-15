@@ -80,10 +80,6 @@ async function searchImages() {
   try {
     const response = await axios.get(url);
 
-    if (response.status < 200 || response.status >= 300) {
-      throw new Error('Failed to fetch images from the server');
-    }
-
     if (!response.data.hits || response.data.hits.length === 0) {
       iziToast.error({
         message:
@@ -106,10 +102,7 @@ async function searchImages() {
       }
     }
   } catch (error) {
-    iziToast.error({
-      message: `An error occurred: ${error.message}`,
-      position: 'topCenter',
-    });
+    throw new Error('Failed to fetch images from the server');
   }
 }
 
