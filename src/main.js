@@ -5,14 +5,16 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchImages } from './js/pixabay-api';
 import { imagesTemplate } from './js/render-function';
+import simpleLightbox from 'simplelightbox';
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const searchInput = document.querySelector('input');
 const loadMoreBtn = document.querySelector('.load-more');
 
-let query;
-let page;
+let query = '';
+let page = 1;
+let per_page = 15;
 let maxPage;
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -68,7 +70,7 @@ form.addEventListener('submit', async e => {
   try {
     const data = await fetchImages(query, page);
 
-    maxPage = Math.ceil(data.totalHits / 15);
+    maxPage = Math.ceil(data.totalHits / per_page);
 
     if (data.totalHits === 0) {
       iziToast.error({
