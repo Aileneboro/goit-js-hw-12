@@ -5,7 +5,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchImages } from './js/pixabay-api';
 import { imagesTemplate } from './js/render-function';
-import simpleLightbox from 'simplelightbox';
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
